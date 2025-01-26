@@ -176,6 +176,80 @@ app.delete("/api/todos/:id", async (req, res) => {
 
 
 
+// microfinace work
+
+const applicationSchema = new mongoose.Schema({
+  name: String,
+  city: String,
+  country: String,
+  status: { type: String, default: 'pending' },
+  token: String,
+});
+
+const Application = mongoose.model('Application', applicationSchema);
+
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Connected to MongoDB finace"))
+  .catch((err) => console.error("Error connecting to MongoDB:", err));
+
+// GET: View all applications
+app.post('/api/applications', async (req, res) => {
+  const { name, city, country } = req.body;
+  try {
+    const application = new Application({ name, city, country });
+    await application.save(); // Yeh line data save karti hai
+    res.status(201).json(application); // Success response bhejta hai
+  } catch (error) {
+    res.status(500).json({ error: 'Error saving application' });
+  }
+});
+
+// PUT: Update application status
+app.put('/api/applications/:id', async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+  try {
+    const application = await Application.findByIdAndUpdate(id, { status }, { new: true });
+    res.json(application);
+  } catch (error) {
+    res.status(500).json({ error: 'Error updating application status' });
+  }
+});
+
+// POST: Add token numbers to applications
+app.post('/api/applications/:id/token', async (req, res) => {
+  const { id } = req.params;
+  const { token } = req.body;
+  try {
+    const application = await Application.findByIdAndUpdate(id, { token }, { new: true });
+    res.json(application);
+  } catch (error) {
+    res.status(500).json({ error: 'Error adding token to application' });
+  }
+});
+
+// GET: Filter applications by city/country
+app.get('/api/applications/filter', async (req, res) => {
+  const { city, country } = req.query;
+  try {
+    const query = {};
+    if (city) query.city = city;
+    if (country) query.country = country;
+
+    const applications = await Application.find(query);
+    res.json(applications);
+  } catch (error) {
+    res.status(500).json({ error: 'Error filtering applications' });
+  }
+});
+
+
+
+
 
 
 
