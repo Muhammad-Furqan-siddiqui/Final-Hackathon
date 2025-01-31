@@ -19,7 +19,9 @@ const crudRoutes = require("./routes/crudRoutes");
 require("./models/db.js"); // yahan m ny import kia  models sy db file ko
 const cors = require("cors");
 const corsOptions ={
-    origin:"https://final-hackathon-frontend-h2il.vercel.app", 
+    origin:"https://final-hackathon-frontend-h2il.vercel.app",
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization",
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
