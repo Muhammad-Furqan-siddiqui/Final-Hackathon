@@ -18,7 +18,14 @@ const crudRoutes = require("./routes/crudRoutes");
 
 require("./models/db.js"); // yahan m ny import kia  models sy db file ko
 const cors = require("cors");
-app.use(cors());
+app.use(cors(
+
+  {
+    origin: "https://final-hackathon-frontend-h2il.vercel.app",
+    credentials: true,
+  }
+ // options for cors middleware
+));
 app.use(bodyParser.json())
 
 
