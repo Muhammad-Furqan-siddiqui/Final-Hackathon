@@ -17,15 +17,15 @@ const crudRoutes = require("./routes/crudRoutes");
 // "https://final-hackathon-frontend-h2il.vercel.app
 
 require("./models/db.js"); // yahan m ny import kia  models sy db file ko
-const cors = require("cors");
-const corsOptions ={
-    origin:"https://final-hackathon-frontend-h2il.vercel.app",
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type,Authorization",
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
+// 🔥 Ensure CORS is enabled at the top
+app.use(cors({
+    origin: "https://final-hackathon-frontend-h2il.vercel.app",
+    methods: "GET,POST,PUT,DELETE,OPTIONS",
+    allowedHeaders: "Content-Type,Authorization"
+}));
+
+// Middleware for JSON parsing
+app.use(express.json());
 
 
 app.use(bodyParser.json())
