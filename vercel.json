@@ -1,22 +1,12 @@
 {
-    "headers": [
-      {
-        "source": "/(.*)",
-        "headers": [
-          {
-            "key": "Access-Control-Allow-Origin",
-            "value": "*"
-          },
-          {
-            "key": "Access-Control-Allow-Methods",
-            "value": "GET,OPTIONS,PATCH,POST,PUT,DELETE"
-          },
-          {
-            "key": "Access-Control-Allow-Headers",
-            "value": "X-Requested-With, Content-Type, Authorization"
-          }
-        ]
-      }
-    ]
-  }
-  
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "https://final-hackathon-frontend-rose.vercel.app" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, PUT, DELETE, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization" }
+      ]
+    }
+  ]
+}
